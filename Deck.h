@@ -2,18 +2,19 @@
 #define DECK_H
 
 #include <list>
-#include <vector>
 
 class Deck {
 public:
     Deck();
-    int drawCard();
-    void returnCards(const std::vector<int>& wonCards);
-    int cardsLeft() const;
+
     void addCard(int card);
+    int drawCard();
+    void returnCards(const std::list<int>& wonCards);
+    int cardsLeft() const;
 
 private:
     std::list<int> cards;
 };
 
 #endif
+
