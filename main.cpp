@@ -80,7 +80,7 @@ int main() {
 		std::cout << "...\n";
 
 		if (hCard + hXtra > cCard + cXtra) {
-			std::cout << "You win!\n"
+			std::cout << "You win!\n";
 			//player wins
 			human.addScore(hCard + hXtra);
 			human.addToDeck(hCard);
@@ -97,7 +97,7 @@ int main() {
 				computer.addToDeck(cXtra);
 			}
 		}
-		std::cout <<"Round "<< round<< "results:\n\tYour score:\t" << human.getScore()<<"\n\tComputer score:\t"<<computer.getScore() << "\n";
+		std::cout <<"Round "<< round<< " results:\n\tYour score:\t" << human.getScore()<<"\n\tComputer score:\t"<<computer.getScore() << "\n";
 		round++;
 		char c;
 		do
