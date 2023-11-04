@@ -9,7 +9,7 @@ int cDeck[] = {1, 2, 3};
 int cSP[] = { 9 };
 
 Player human(false);
-Player computer;
+Player computer(false);
 
 
 int main() {
@@ -27,6 +27,19 @@ int main() {
 	}
 	int round = 1;
 	bool cont = true;
+	int style = 0;
+	int rds = -1;
+	while (style != 1 && style != 2) {
+		std::cout << "Play until out of cards (1) or for some number of rounds (2)?\n";
+		std::cin >> style;
+	}
+	if (style == 2) {
+		while (rds <= 0) {
+			std::cin.get();
+			std::cout << "Enter number of rounds to play: \n";
+			std::cin >> rds;
+		}
+	}
 	while (cont && !(human.getDeckLength() == 0 && human.getSPLength() == 0) && !(computer.getDeckLength() == 0 && computer.getSPLength() == 0)) {
 		std::cout << "*\n* Round " << round << ":\n*\n";
 		//draw cards
@@ -122,8 +135,20 @@ int main() {
 			}
 		}
 		std::cout <<"Round "<< round<< " results:\n\tYour score:\t" << human.getScore()<<"\n\tComputer score:\t"<<computer.getScore() << "\n";
-		round++;
-		if (human.getDeckLength() + human.getSPLength() == 0) {
+
+		if (round == rds) {
+			std::cout << "Rounds complete... ";
+			if (human.getScore() > computer.getScore()) {
+				std::cout << "you win!\n";
+			}
+			else if (computer.getScore() > human.getScore()) {
+				std::cout << "you lose...\n";
+			}
+			else {
+				std::cout << "tie!\n";
+			}
+			cont = false;
+		} else if (human.getDeckLength() + human.getSPLength() == 0) {
 			std::cout << "You're out of cards... you lose!";
 			cont = false;
 		}
@@ -140,12 +165,6 @@ int main() {
 			}
 			cont = c == 'y';
 		}
-	}
-
-	if (human.getDeckLength() == 0 && human.getSPLength() == 0) {
-		std::cout << "You ran out of cards... you lose!\n";
-	}
-	else if (computer.getDeckLength() == 0 && computer.getSPLength() == 0) {
-		std::cout << "Computer ran out of cards... you win!\n";
+		round++;
 	}
 }
