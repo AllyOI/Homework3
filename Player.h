@@ -8,6 +8,8 @@ private:
     int score;
     
 public:
+    Player();
+    Player(bool);
     int drawDeck();
     int getDeckLength();
     int drawSP();
@@ -17,7 +19,6 @@ public:
     void addScore(int);
     int getScore();
     
-    Player();
     ~Player();
 };
 

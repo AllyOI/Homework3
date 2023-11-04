@@ -1,11 +1,30 @@
 #include "Player.h"
 #include <iostream>
+#include <array>
 
-//will be where you can initialize your test cases
-Player human;
+//where you can initialize your test cases
+int pDeck[] = {1, 8, 9};
+int pSP[] = { 9 };
+int cDeck[] = {1, 2, 3};
+int cSP[] = { 9 };
+
+Player human(false);
 Player computer;
 
+
 int main() {
+	for (int c : pDeck) {
+		human.addToDeck(c);
+	}
+	for (int c : pSP) {
+		human.addSP(c);
+	}
+	for (int c : cDeck) {
+		computer.addToDeck(c);
+	}
+	for (int c : cSP) {
+		computer.addSP(c);
+	}
 	int round = 1;
 	bool cont = true;
 	while (cont && !(human.getDeckLength() == 0 && human.getSPLength() == 0) && !(computer.getDeckLength() == 0 && computer.getSPLength() == 0)) {
@@ -17,12 +36,17 @@ int main() {
 		//Make the choice
 		std::cout << "You peek at the card you drew... you drew a " << hCard << ".\n";
 		int choose = 0;
+		std::cout << "Cards in deck: " << human.getDeckLength() << "\nCards in side pile: " << human.getSPLength() << "\n";
 		if (human.getSPLength() == 0) {
 			std::cout << "Nothing in side pile... must push to side pile!\n";
 			choose = 1;
 		}
 		else if (human.getSPLength() == 5) {
 			std::cout << "Side pile full... must pull from side pile.\n";
+			choose = 2;
+		}
+		else if (human.getDeckLength() == 0) {
+			std::cout << "Deck empty... must pull from side pile.\n";
 			choose = 2;
 		}
 		while (choose != 1 && choose != 2) {
@@ -99,13 +123,23 @@ int main() {
 		}
 		std::cout <<"Round "<< round<< " results:\n\tYour score:\t" << human.getScore()<<"\n\tComputer score:\t"<<computer.getScore() << "\n";
 		round++;
-		char c;
-		do
-		{
-			std::cout << "Continue? (y/n)\n";
-			std::cin >> c;
-		} while (c != 'y' && c != 'n');
-		cont = c == 'y';
+		if (human.getDeckLength() + human.getSPLength() == 0) {
+			std::cout << "You're out of cards... you lose!";
+			cont = false;
+		}
+		else if (computer.getDeckLength() + computer.getSPLength() == 0) {
+			std::cout << "Computer is out of cards... you win!";
+			cont = false;
+		} 
+		else {
+			char c = 'a';
+			while (c != 'y' && c != 'n')
+			{
+				std::cout << "Continue? (y/n)\n";
+				std::cin >> c;
+			}
+			cont = c == 'y';
+		}
 	}
 
 	if (human.getDeckLength() == 0 && human.getSPLength() == 0) {

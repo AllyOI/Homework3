@@ -5,7 +5,7 @@
 
 class Deck {
 public:
-    Deck();
+    Deck(bool=true);
 
     void addCard(int card);
     int drawCard();

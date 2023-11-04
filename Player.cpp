@@ -8,6 +8,10 @@ Player::Player() {
     this->score = 0;
 }
 
+Player::Player(bool standard) {
+    deck = Deck(standard);
+}
+
 Player::~Player() {
     
 }
@@ -41,7 +45,7 @@ void Player::addSP(int card) {
 }
 
 void Player::addScore(int score) {
-    this->score = score;
+    this->score += score;
 }
 
 int Player::getScore() {

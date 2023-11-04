@@ -1,10 +1,13 @@
 #include "deck.h"
 
-Deck::Deck() {
-    // Initialize a standard deck of cards (52 cards)
-    for (int suit = 0; suit < 4; ++suit) {
-        for (int rank = 2; rank <= 14; ++rank) {
-            cards.push_back(rank);
+Deck::Deck(bool standard) {
+    if (standard) 
+    {
+        // Initialize a standard deck of cards (52 cards)
+        for (int suit = 0; suit < 4; ++suit) {
+            for (int rank = 2; rank <= 14; ++rank) {
+                cards.push_back(rank);
+            }
         }
     }
 }

@@ -64,6 +64,6 @@ int SidePile::getSPLength() {
     if(top == -1) {
         return 0;
     } else {
-        return top;
+        return top + 1;
     }
 }
